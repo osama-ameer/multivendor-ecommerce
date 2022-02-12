@@ -148,9 +148,28 @@ router.post('/register', async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      error: 'Your request could not be processed. Please try again.'
+      error: error
     });
   }
+
+  // const { name, email, password } = req.body;
+  // const { email, firstName, lastName, password } = req.body;
+
+
+  // const user = await User.create({
+  //   email,
+  //    firstName,
+  //     lastName,
+  //      password 
+    
+  // });
+
+  
+  //   sendToken(user, 201, res);
+    
+
+
+
 });
 
 router.post('/forgot', async (req, res) => {

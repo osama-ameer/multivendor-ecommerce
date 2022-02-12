@@ -444,8 +444,8 @@ router.post(
         taxable,
         isActive,
         brand,
-        imageUrl,
-        imageKey
+        // imageUrl,
+        // imageKey
       });
 
       const savedProduct = await product.save();
@@ -457,7 +457,7 @@ router.post(
       });
     } catch (error) {
       return res.status(400).json({
-        error: 'Your request could not be processed. Please try again.'
+        error: "your req is not processed"
       });
     }
   }
