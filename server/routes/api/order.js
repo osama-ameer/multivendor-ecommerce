@@ -125,9 +125,17 @@ router.get('/search', auth, async (req, res) => {
 });
 
 // fetch orders api
-router.get('/', auth, async (req, res) => {
+router.get('/',auth,  async (req, res) => {
   try {
+  // const orders = await Order.find();
+
     const user = req.user._id;
+    // console.log(user)
+
+    // res.status(200).json({
+    //   orders,
+    //   // user
+    // })
 
     let ordersDoc = await Order.find({ user }).populate({
       path: 'cart',
@@ -138,13 +146,19 @@ router.get('/', auth, async (req, res) => {
         }
       }
     });
-
     ordersDoc = ordersDoc.filter(order => order.cart);
+
+    // res.status(200).json({
+    //   ordersDoc,
+        
+    //   })
+  
+
 
     if (ordersDoc.length > 0) {
       const newOrders = ordersDoc.map(o => {
         return {
-          _id: o._id,
+          id: o._id,
           total: parseFloat(Number(o.total.toFixed(2))),
           created: o.created,
           products: o.cart?.products
@@ -163,7 +177,7 @@ router.get('/', auth, async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({
-      error: 'Your request could not be processed. Please try again.'
+      error: error.message
     });
   }
 });

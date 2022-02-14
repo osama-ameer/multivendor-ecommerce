@@ -355,7 +355,7 @@ router.get('/list/brand/:slug', async (req, res) => {
   }
 });
 
-router.get('/list/select', auth, async (req, res) => {
+router.get('/list/select', async (req, res) => {
   try {
     const products = await Product.find({}, 'name');
 
@@ -503,7 +503,7 @@ router.get(
       });
     } catch (error) {
       res.status(400).json({
-        error: 'Your request could not be processed. Please try again.'
+        error: error.message
       });
     }
   }
